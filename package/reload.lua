@@ -91,10 +91,9 @@ end
 M.deregister = M.cleanup
 
 function M:register(...)
-	assert( self == box.reload, "Static call" )
+	assert( self == M, "Static call" )
 	if select('#',...) == 1 then
 		local arg = ...
-		print("one arg ",type(arg))
 		if type(arg) == 'table' then
 			if arg.destroy then
 				self.O[ arg ] = arg.destroy
