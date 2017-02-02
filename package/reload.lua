@@ -26,13 +26,19 @@ end
 package.loaded[N] = nil
 
 if not package.reload then
-	M = setmetatable({
+	
+	local fio = require('fio');
+	local src = debug.getinfo(3, "S").source:sub(2);
+	local lnk = fio.readlink(src);
+	if lnk then src = lnk end;
+
+	if lnk then src = lnk end;	M = setmetatable({
 		O      = {};
 		F      = {};
 		C      = {};
 		loaded = {};
 		count  = 1;
-		script = arg[0];
+		script = src;
 	},{
 		__tostring = function () return 'package.reload{}' end;
 		__call = function(m,...)
