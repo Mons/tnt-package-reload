@@ -29,10 +29,12 @@ if not package.reload then
 	
 	local fio = require('fio');
 	local src = debug.getinfo(3, "S").source:sub(2);
-	local lnk = fio.readlink(src);
-	if lnk then src = lnk end;
+	
+	-- Keep original file path, even if it was a symlink
+	--local lnk = fio.readlink(src);
+	--if lnk then src = lnk end;
 
-	if lnk then src = lnk end;	M = setmetatable({
+	M = setmetatable({
 		O      = {};
 		F      = {};
 		C      = {};
